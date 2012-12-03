@@ -19,7 +19,7 @@ DATO	EQU		0X25
 
 			ORG		0X00
 			CALL	CONF
-			GOTO	MAIN
+			GOTO	INICIO
 			ORG		0X08
 
 INT_CALL
@@ -97,12 +97,19 @@ CONF
 
 
 			
-MAIN
+INICIO
 			BSF     LCD_EN                                       ; LCD_EN = 1 / prende el display LCD
       		BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a enviar una instruccion
       		MOVLW   b'00000001'                                  ; se carga la instruccion que limpia el LCD
       		CALL    PRINT                                        ; envia la instruccion
-      		BSF     LCD_RS 
+      		BSF     LCD_RS
+			CALL	LEER
+			MOVWF	PORTD
+			BTFSS	PORTD,0
+			CALL 	ESCRIBIR_OFF
+			CALL	ESCRIBIR_ON 
+			
+MAIN
 			GOTO	MAIN
 
 
@@ -124,7 +131,7 @@ ESCRIBIR:
 			BANKSEL	EEADR
 			MOVLW	0X11
 			MOVWF	EEADR
-			MOVLW	STATE
+			MOVF	STATE,W
 			MOVWF	EEDATA
 			BANKSEL	EECON1
 			BCF		EECON1,EEPGD

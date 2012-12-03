@@ -2,15 +2,14 @@ import speech
 import serial
 import time
 import sys
-
-
-s=serial.Serial("COM9") 
+s=serial.Serial(sys.argv[1]) 
 def respuesta(f, l):
-    speech.say(f)
-    if f == "Uno":
+    if f == "Prende":
         s.write("1")
+        print("ON")
     else:
-        s.write("0")
+        s.write("<<<<0")
+        print("OFF")
 
-l=speech.listenfor(['Uno','Dos'],respuesta)
+l=speech.listenfor(['Prende','Apaga'],respuesta)
 raw_input()
