@@ -1,4 +1,4 @@
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  1
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (LIST)
 000024 6E24           00038                         MOVWF   STATE
 000026 EC68 F000      00039                         CALL    ESCRIBIR
 00002A EC85 F000      00040                         CALL    ESCRIBIR_ON
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  2
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00008A 8C85           00091                 BSF     RST_LCD                                      ; no reinicia el LCD
 00008C ECA2 F000      00092                 CALL    CONFIG_SPI                                   ; configura la comunicacion serial 
                             para el LCD
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  3
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -140,9 +140,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000A4 8E00           00105                 BSF     LCD_RS
 0000A6 EC7B F000      00106                         CALL    LEER
 0000AA 6E83           00107                         MOVWF   PORTD
-0000AC A083           00108                         BTFSS   PORTD,0
-0000AE EC92 F000      00109                         CALL    ESCRIBIR_OFF
-0000B2 EC85 F000      00110                         CALL    ESCRIBIR_ON 
+0000AC B083           00108                         BTFSC   PORTD,0
+0000AE EC85 F000      00109                         CALL    ESCRIBIR_ON
+0000B2 EC92 F000      00110                         CALL    ESCRIBIR_OFF 
                       00111                         
 0000B6                00112 MAIN
 0000B6 EF5B F000      00113                         GOTO    MAIN
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000E4 6EA7           00140                         MOVWF   EECON2
 0000E6 0EAA           00141                         MOVLW   0XAA
 0000E8 6EA7           00142                         MOVWF   EECON2
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  4
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Warning[226]: Destination address must be word aligned
 000142 0012           00186                         RETURN
                       00187                         
                       00188 
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  5
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ Message[313]: CBLOCK constants will start with a value of 0.
                       00042 ;Envia los datos a travez del puerto serial para configurar el puerto A del chip MCP23S17
                       00043 ;=======================================================================================================
                             ======
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  6
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0001A2 0E01           00082         MOVLW   B'00000001'                     ;Instruccion que se quiere enviar al LCD(Limpia la panta
                             lla y retorna a HOME)
 0001A4 6E01           00083         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  7
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0001EA 0012           00122         RETURN
 0001EC                00123 PRINT_G
 0001EC 0E47           00124         MOVLW   'G'
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  8
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000254                00175 PRINT_S
 000254 0E53           00176         MOVLW   'S'
 000256 ECDA F000      00177         CALL    PRINT
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE  9
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002BC 0E66           00228         MOVLW   'f'
 0002BE ECDA F000      00229         CALL    PRINT
 0002C2 0012           00230         RETURN
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 10
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000326 ECDA F000      00281         CALL    PRINT
 00032A 0012           00282         RETURN
 00032C                00283 PRINT_s
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 11
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -647,7 +647,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000392 0012           00334         RETURN
 000394                00335 PRINT_5
 000394 0E35           00336         MOVLW   '5'
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 12
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -706,7 +706,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0003E2 969E           00380         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
 0003E4 0E3F           00381         MOVLW   B'00111111'                     ;RS=0 Y E=0
 0003E6 6EC9           00382         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 13
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -765,7 +765,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             SPI
 000444 010F           00425         BANKSEL PIR1                            ;Cambia de banco
 000446 6EC9           00426         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 14
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -812,7 +812,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000488 0012           00457         RETURN                                          ;Retorna a la siguiente linea del CALL que llamo
                              a la rutina
                       00190                         END
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 15
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 15
 
 
 SYMBOL TABLE
@@ -871,7 +871,7 @@ AN1                               00000001
 AN10                              00000005
 AN11                              00000006
 AN12                              00000004
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 16
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 16
 
 
 SYMBOL TABLE
@@ -930,7 +930,7 @@ CCP1X                             00000005
 CCP1Y                             00000004
 CCP2CON                           00000FBA
 CCP2IE                            00000000
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 17
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 17
 
 
 SYMBOL TABLE
@@ -989,7 +989,7 @@ CCPR4                             00000F74
 CCPR4H                            00000F75
 CCPR4L                            00000F74
 CCPR5                             00000F71
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 18
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 18
 
 
 SYMBOL TABLE
@@ -1048,7 +1048,7 @@ DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
 DC3B0                             00000004
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 19
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 19
 
 
 SYMBOL TABLE
@@ -1107,7 +1107,7 @@ ECCP3CON                          00000FB7
 ECCP3DEL                          00000F69
 ECCPAS0                           00000004
 ECCPAS1                           00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 20
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 20
 
 
 SYMBOL TABLE
@@ -1166,7 +1166,7 @@ I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 IBF                               00000007
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 21
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 21
 
 
 SYMBOL TABLE
@@ -1225,7 +1225,7 @@ IRCF0                             00000004
 IRCF1                             00000005
 IRCF2                             00000006
 IRVST                             00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 22
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 22
 
 
 SYMBOL TABLE
@@ -1284,7 +1284,7 @@ LATE7                             00000007
 LATF                              00000F8E
 LATF0                             00000000
 LATF1                             00000001
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 23
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 23
 
 
 SYMBOL TABLE
@@ -1343,7 +1343,7 @@ LVV3                              00000003
 MAIN                              000000B6
 MCLR                              00000005
 MEMCON                            00000F9C
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 24
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 24
 
 
 SYMBOL TABLE
@@ -1402,7 +1402,7 @@ P1DC2                             00000002
 P1DC3                             00000003
 P1DC4                             00000004
 P1DC5                             00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 25
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 25
 
 
 SYMBOL TABLE
@@ -1461,7 +1461,7 @@ PDC4                              00000004
 PDC5                              00000005
 PDC6                              00000006
 PEIE                              00000006
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 26
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 26
 
 
 SYMBOL TABLE
@@ -1520,7 +1520,7 @@ PRINT_E                           000001DC
 PRINT_F                           000001E4
 PRINT_G                           000001EC
 PRINT_H                           000001F4
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 27
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 27
 
 
 SYMBOL TABLE
@@ -1579,7 +1579,7 @@ PRSEN                             00000007
 PSA                               00000003
 PSP0                              00000000
 PSP1                              00000001
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 28
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 28
 
 
 SYMBOL TABLE
@@ -1638,7 +1638,7 @@ RC1                               00000001
 RC1IE                             00000005
 RC1IF                             00000005
 RC1IP                             00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 29
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 29
 
 
 SYMBOL TABLE
@@ -1697,7 +1697,7 @@ RF5                               00000005
 RF6                               00000006
 RF7                               00000007
 RG0                               00000000
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 30
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 30
 
 
 SYMBOL TABLE
@@ -1756,7 +1756,7 @@ SDI                               00000004
 SDI1                              00000004
 SDI2                              00000005
 SDO                               00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 31
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 31
 
 
 SYMBOL TABLE
@@ -1815,7 +1815,7 @@ SSPIP                             00000003
 SSPM0                             00000000
 SSPM1                             00000001
 SSPM2                             00000002
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 32
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 32
 
 
 SYMBOL TABLE
@@ -1874,7 +1874,7 @@ T3CCP2                            00000006
 T3CKPS0                           00000004
 T3CKPS1                           00000005
 T3CON                             00000FB1
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 33
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 33
 
 
 SYMBOL TABLE
@@ -1933,7 +1933,7 @@ TOSU                              00000FFF
 TRISA                             00000F92
 TRISA0                            00000000
 TRISA1                            00000001
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 34
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 34
 
 
 SYMBOL TABLE
@@ -1992,7 +1992,7 @@ TRISF6                            00000006
 TRISF7                            00000007
 TRISG                             00000F98
 TRISG0                            00000000
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 35
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 35
 
 
 SYMBOL TABLE
@@ -2051,7 +2051,7 @@ TXEN2                             00000005
 TXIE                              00000004
 TXIF                              00000004
 TXIP                              00000004
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 36
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 36
 
 
 SYMBOL TABLE
@@ -2110,7 +2110,7 @@ _CONFIG2L                         00300002
 _CONFIG3H                         00300005
 _CONFIG3L                         00300004
 _CONFIG4L                         00300006
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 37
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 37
 
 
 SYMBOL TABLE
@@ -2169,7 +2169,7 @@ _EBTRB_ON_7H                      000000BF
 _ECCPMX_PORTE_3H                  000000FF
 _ECCPMX_PORTH_3H                  000000FD
 _FCMEN_OFF_1H                     000000BF
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 38
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 38
 
 
 SYMBOL TABLE
@@ -2228,7 +2228,7 @@ _WDTPS_512_2H                     000000F3
 _WDTPS_64_2H                      000000ED
 _WDTPS_8192_2H                    000000FB
 _WDTPS_8_2H                       000000E7
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 39
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 39
 
 
 SYMBOL TABLE
@@ -2280,7 +2280,7 @@ MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 02C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0300 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0340 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:23:42         PAGE 40
+MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 40
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
