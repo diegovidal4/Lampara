@@ -1,4 +1,4 @@
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  1
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -38,7 +38,7 @@ Warning[205]: Found directive in column 1. (LIST)
                       00019 
 000000                00020                         ORG             0X00
 000000 EC21 F000      00021                         CALL    CONF
-000004 EF4D F000      00022                         GOTO    INICIO
+000004 EF51 F000      00022                         GOTO    INICIO
 000008                00023                         ORG             0X08
                       00024 
 000008                00025 INT_CALL
@@ -55,9 +55,9 @@ Warning[205]: Found directive in column 1. (LIST)
 000020 0EFF           00036                         MOVLW   0XFF
 000022 6E83           00037                         MOVWF   PORTD
 000024 6E24           00038                         MOVWF   STATE
-000026 EC68 F000      00039                         CALL    ESCRIBIR
-00002A EC85 F000      00040                         CALL    ESCRIBIR_ON
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  2
+000026 EC6C F000      00039                         CALL    ESCRIBIR
+00002A EC89 F000      00040                         CALL    ESCRIBIR_ON
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -69,10 +69,10 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000030 0010           00044                         RETFIE
                       00045 
 000032                00046 CLEAR
-000032 EC92 F000      00047                         CALL    ESCRIBIR_OFF
+000032 EC96 F000      00047                         CALL    ESCRIBIR_OFF
 000036 6A83           00048                         CLRF    PORTD
 000038 6A24           00049                         CLRF    STATE
-00003A EC68 F000      00050                         CALL    ESCRIBIR
+00003A EC6C F000      00050                         CALL    ESCRIBIR
 00003E 9A9E           00051                         BCF             PIR1,5
 000040 0010           00052                         RETFIE
 000042                00053 CONF
@@ -112,135 +112,139 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000080 6A83           00087                         CLRF    PORTD
 000082 8480           00088                         BSF     LCD                                          ; habilita el display LCD
 000084 9C85           00089                 BCF     RST_LCD                                      ; reinicia el display LCD
-000086 EC5D F000      00090                 CALL    DELAY                                    ; llama a LIT_DELAY
+000086 EC61 F000      00090                 CALL    DELAY                                    ; llama a LIT_DELAY
 00008A 8C85           00091                 BSF     RST_LCD                                      ; no reinicia el LCD
-00008C ECA2 F000      00092                 CALL    CONFIG_SPI                                   ; configura la comunicacion serial 
+00008C ECA6 F000      00092                 CALL    CONFIG_SPI                                   ; configura la comunicacion serial 
                             para el LCD
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  3
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000090 ECC7 F000      00093                 CALL    INI_LCD
+000090 ECCB F000      00093                 CALL    INI_LCD
 000094 8C00           00094                         BSF             LCD_EN 
 000096 8E00           00095                         BSF             LCD_RS  
 000098 0012           00096                         RETURN
                       00097 
-                      00098 
-                      00099                         
-00009A                00100 INICIO
-00009A 8C00           00101                         BSF     LCD_EN                                       ; LCD_EN = 1 / prende el di
+00009A                00098 WOFF
+00009A EC96 F000      00099                         CALL    ESCRIBIR_OFF
+00009E EF5F F000      00100                         GOTO    MAIN
+                      00101                         
+0000A2                00102 INICIO
+0000A2 8C00           00103                         BSF     LCD_EN                                       ; LCD_EN = 1 / prende el di
                             splay LCD
-00009C 9E00           00102                 BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a e
+0000A4 9E00           00104                 BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a e
                             nviar una instruccion
-00009E 0E01           00103                 MOVLW   b'00000001'                                  ; se carga la instruccion que limpi
+0000A6 0E01           00105                 MOVLW   b'00000001'                                  ; se carga la instruccion que limpi
                             a el LCD
-0000A0 ECDA F000      00104                 CALL    PRINT                                        ; envia la instruccion
-0000A4 8E00           00105                 BSF     LCD_RS
-0000A6 EC7B F000      00106                         CALL    LEER
-0000AA 6E83           00107                         MOVWF   PORTD
-0000AC B083           00108                         BTFSC   PORTD,0
-0000AE EC85 F000      00109                         CALL    ESCRIBIR_ON
-0000B2 EC92 F000      00110                         CALL    ESCRIBIR_OFF 
-                      00111                         
-0000B6                00112 MAIN
-0000B6 EF5B F000      00113                         GOTO    MAIN
+0000A8 ECDE F000      00106                 CALL    PRINT                                        ; envia la instruccion
+0000AC 8E00           00107                 BSF     LCD_RS
+0000AE EC7F F000      00108                         CALL    LEER
+0000B2 6E83           00109                         MOVWF   PORTD
+0000B4 A283           00110                         BTFSS   PORTD,1
+0000B6 EF4D F000      00111                         GOTO    WOFF
+0000BA EC89 F000      00112                         CALL    ESCRIBIR_ON 
+                      00113 
                       00114 
-                      00115 
-0000BA                00116 DELAY: 
-0000BA 0E0A           00117                         MOVLW   d'10'   ;Asigna el valor 7 a W
-0000BC 6E22           00118                         MOVWF   CONT2   ;Asigna el valor de W a CONT2
-0000BE 0EFA           00119                         MOVLW   d'250'  ;Asigna a W el valor 250
-0000C0 6E21           00120                         MOVWF   CONT    ;Asigna el valor de W a CONT
-0000C2 0000           00121                         NOP
-0000C4 2E21           00122                         DECFSZ  CONT
-0000C6 EF62 F000      00123                         GOTO    $-.2    ;Vuelve a la linea del NOP
-0000CA 2E22           00124                         DECFSZ  CONT2
-0000CC D7FC           00125                         BRA     $-.6    ;Vuelve donde se asigna el valor de CONT2, para resetearlo
-0000CE 0012           00126                         RETURN
-                      00127 
-                      00128 
-0000D0                00129 ESCRIBIR:
-0000D0 9EF2           00130                         BCF             INTCON,GIE
-0000D2 010F           00131                         BANKSEL EEADR
-0000D4 0E11           00132                         MOVLW   0X11
-0000D6 6EA9           00133                         MOVWF   EEADR
-0000D8 5024           00134                         MOVF    STATE,W
-0000DA 6EA8           00135                         MOVWF   EEDATA
-0000DC 010F           00136                         BANKSEL EECON1
-0000DE 9EA6           00137                         BCF             EECON1,EEPGD
-0000E0 84A6           00138                         BSF             EECON1,WREN
-0000E2 0E55           00139                         MOVLW   55H
-0000E4 6EA7           00140                         MOVWF   EECON2
-0000E6 0EAA           00141                         MOVLW   0XAA
-0000E8 6EA7           00142                         MOVWF   EECON2
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  4
+                      00115                         
+0000BE                00116 MAIN
+0000BE EF5F F000      00117                         GOTO    MAIN
+                      00118 
+                      00119 
+0000C2                00120 DELAY: 
+0000C2 0E0A           00121                         MOVLW   d'10'   ;Asigna el valor 7 a W
+0000C4 6E22           00122                         MOVWF   CONT2   ;Asigna el valor de W a CONT2
+0000C6 0EFA           00123                         MOVLW   d'250'  ;Asigna a W el valor 250
+0000C8 6E21           00124                         MOVWF   CONT    ;Asigna el valor de W a CONT
+0000CA 0000           00125                         NOP
+0000CC 2E21           00126                         DECFSZ  CONT
+0000CE EF66 F000      00127                         GOTO    $-.2    ;Vuelve a la linea del NOP
+0000D2 2E22           00128                         DECFSZ  CONT2
+0000D4 D7FC           00129                         BRA     $-.6    ;Vuelve donde se asigna el valor de CONT2, para resetearlo
+0000D6 0012           00130                         RETURN
+                      00131 
+                      00132 
+0000D8                00133 ESCRIBIR:
+0000D8 9EF2           00134                         BCF             INTCON,GIE
+0000DA 010F           00135                         BANKSEL EEADR
+0000DC 0E11           00136                         MOVLW   0X11
+0000DE 6EA9           00137                         MOVWF   EEADR
+0000E0 5024           00138                         MOVF    STATE,W
+0000E2 6EA8           00139                         MOVWF   EEDATA
+0000E4 010F           00140                         BANKSEL EECON1
+0000E6 9EA6           00141                         BCF             EECON1,EEPGD
+0000E8 84A6           00142                         BSF             EECON1,WREN
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0000EA 82A6           00143                         BSF             EECON1,WR
-0000EC B2A6           00144                         BTFSC   EECON1,WR
+0000EA 0E55           00143                         MOVLW   55H
+0000EC 6EA7           00144                         MOVWF   EECON2
+0000EE 0EAA           00145                         MOVLW   0XAA
+0000F0 6EA7           00146                         MOVWF   EECON2
+0000F2 82A6           00147                         BSF             EECON1,WR
+0000F4 B2A6           00148                         BTFSC   EECON1,WR
 Warning[226]: Destination address must be word aligned
-0000EE D7FE           00145                         BRA             $-1
-0000F0 94A6           00146                         BCF             EECON1,WREN
-0000F2 0100           00147                         BANKSEL 0
-0000F4 0012           00148                         RETURN
-                      00149 
-0000F6                00150 LEER:
-0000F6 010F           00151                         BANKSEL EEADR
-0000F8 0E11           00152                         MOVLW   0X11
-0000FA 6EA9           00153                         MOVWF   EEADR
-0000FC 010F           00154                         BANKSEL EECON1
-0000FE 9EA6           00155                         BCF             EECON1,EEPGD
-000100 80A6           00156                         BSF             EECON1,RD
-000102 010F           00157                         BANKSEL EEDATA
-000104 50A8           00158                         MOVF    EEDATA,W
-000106 0100           00159                         BANKSEL 0
-000108 0012           00160                         RETURN
-                      00161 
-00010A                00162 ESCRIBIR_ON:
-00010A 8C00           00163                         BSF     LCD_EN                                       ; LCD_EN = 1 / prende el di
+0000F6 D7FE           00149                         BRA             $-1
+0000F8 94A6           00150                         BCF             EECON1,WREN
+0000FA 0100           00151                         BANKSEL 0
+0000FC 0012           00152                         RETURN
+                      00153 
+0000FE                00154 LEER:
+0000FE 010F           00155                         BANKSEL EEADR
+000100 0E11           00156                         MOVLW   0X11
+000102 6EA9           00157                         MOVWF   EEADR
+000104 010F           00158                         BANKSEL EECON1
+000106 9EA6           00159                         BCF             EECON1,EEPGD
+000108 80A6           00160                         BSF             EECON1,RD
+00010A 010F           00161                         BANKSEL EEDATA
+00010C 50A8           00162                         MOVF    EEDATA,W
+00010E 0100           00163                         BANKSEL 0
+000110 0012           00164                         RETURN
+                      00165 
+000112                00166 ESCRIBIR_ON:
+000112 8C00           00167                         BSF     LCD_EN                                       ; LCD_EN = 1 / prende el di
                             splay LCD
-00010C 9E00           00164                 BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a e
+000114 9E00           00168                 BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a e
                             nviar una instruccion
-00010E 0E01           00165                 MOVLW   b'00000001'                                  ; se carga la instruccion que limpi
+000116 0E01           00169                 MOVLW   b'00000001'                                  ; se carga la instruccion que limpi
                             a el LCD
-000110 ECDA F000      00166                 CALL    PRINT                                        ; envia la instruccion
-000114 8E00           00167                 BSF     LCD_RS                                   
-000116 0E4F           00168                         MOVLW   'O'
-000118 ECDA F000      00169                         CALL    PRINT
-00011C 0E4E           00170                         MOVLW   'N'
-00011E ECDA F000      00171                         CALL    PRINT
-000122 0012           00172                         RETURN
-                      00173 
-000124                00174 ESCRIBIR_OFF:
-000124 8C00           00175                     BSF     LCD_EN                                       ; LCD_EN = 1 / prende el displa
+000118 ECDE F000      00170                 CALL    PRINT                                        ; envia la instruccion
+00011C 8E00           00171                 BSF     LCD_RS                                   
+00011E 0E4F           00172                         MOVLW   'O'
+000120 ECDE F000      00173                         CALL    PRINT
+000124 0E4E           00174                         MOVLW   'N'
+000126 ECDE F000      00175                         CALL    PRINT
+00012A 0012           00176                         RETURN
+                      00177 
+00012C                00178 ESCRIBIR_OFF:
+00012C 8C00           00179                     BSF     LCD_EN                                       ; LCD_EN = 1 / prende el displa
                             y LCD
-000126 9E00           00176                 BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a e
+00012E 9E00           00180                 BCF     LCD_RS                                       ; LCD_RS = 0 / indica que se va a e
                             nviar una instruccion
-000128 0E01           00177                 MOVLW   b'00000001'                                  ; se carga la instruccion que limpi
+000130 0E01           00181                 MOVLW   b'00000001'                                  ; se carga la instruccion que limpi
                             a el LCD
-00012A ECDA F000      00178                 CALL    PRINT                                        ; envia la instruccion
-00012E 8E00           00179                 BSF     LCD_RS 
-000130 0E4F           00180                         MOVLW   'O'
-000132 ECDA F000      00181                         CALL    PRINT
-000136 0E46           00182                         MOVLW   'F'
-000138 ECDA F000      00183                         CALL    PRINT
-00013C 0E46           00184                         MOVLW   'F'
-00013E ECDA F000      00185                         CALL    PRINT
-000142 0012           00186                         RETURN
-                      00187                         
-                      00188 
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  5
+000132 ECDE F000      00182                 CALL    PRINT                                        ; envia la instruccion
+000136 8E00           00183                 BSF     LCD_RS 
+000138 0E4F           00184                         MOVLW   'O'
+00013A ECDE F000      00185                         CALL    PRINT
+00013E 0E46           00186                         MOVLW   'F'
+000140 ECDE F000      00187                         CALL    PRINT
+000144 0E46           00188                         MOVLW   'F'
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00189                         #INCLUDE <Lib_LCD_18F.INC>
+000146 ECDE F000      00189                         CALL    PRINT
+00014A 0012           00190                         RETURN
+                      00191                         
+                      00192 
+                      00193                         #INCLUDE <Lib_LCD_18F.INC>
                       00001 ;=======================================================================================================
                             ============
                       00002 ;                                 LIBRERIA LCD PARA PIC18 EXPLORER BOARD
@@ -279,402 +283,402 @@ Message[313]: CBLOCK constants will start with a value of 0.
                       00030         ENDC                                            ;Termina la declaracion de variables
                       00031 ;===============================================CONFIG_SPI==============================================
                             ====
-000144                00032 CONFIG_SPI
-000144 010F           00033         BANKSEL SSP1STAT                        ;Cambia de banco
-000146 6AC7           00034         CLRF    SSP1STAT                        ;Limpia el SSP1STAT
-000148 0E40           00035         MOVLW   B'01000000'             ;Pone el SPI en modo Maestro
-00014A 6EC7           00036         MOVWF   SSP1STAT                        ;cke = 0 (modo 1,1)
-00014C 010F           00037         BANKSEL SSP1CON1                        ;Cambia de banco
-00014E 6AC6           00038         CLRF    SSP1CON1                        ;Limpia el SSP1CON
-000150 0E22           00039         MOVLW   B'00100010'             ;Enciende el SPI
-000152 6EC6           00040         MOVWF   SSP1CON1                        ;clk/16,ckp=1(modo 1,1)
+00014C                00032 CONFIG_SPI
+00014C 010F           00033         BANKSEL SSP1STAT                        ;Cambia de banco
+00014E 6AC7           00034         CLRF    SSP1STAT                        ;Limpia el SSP1STAT
+000150 0E40           00035         MOVLW   B'01000000'             ;Pone el SPI en modo Maestro
+000152 6EC7           00036         MOVWF   SSP1STAT                        ;cke = 0 (modo 1,1)
+000154 010F           00037         BANKSEL SSP1CON1                        ;Cambia de banco
+000156 6AC6           00038         CLRF    SSP1CON1                        ;Limpia el SSP1CON
+000158 0E22           00039         MOVLW   B'00100010'             ;Enciende el SPI
+00015A 6EC6           00040         MOVWF   SSP1CON1                        ;clk/16,ckp=1(modo 1,1)
                       00041 ;==========================================CONFIG_PORTA=================================================
-                            ====
-                      00042 ;Envia los datos a travez del puerto serial para configurar el puerto A del chip MCP23S17
-                      00043 ;=======================================================================================================
-                            ======
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  6
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000154 9480           00044         BCF             LCD                                     ;Limpia LCD (PortA,2)
-000156 0E40           00045         MOVLW   0x40                            ;Cargas un 40 Hexa. a W
-000158 6EC9           00046         MOVWF   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
-00015A EC3F F002      00047         CALL    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
-00015E 0E00           00048         MOVLW   0x00                            ;Mueve un 0 Hex. a W
-000160 6EC9           00049         MOVWF   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
-000162 EC3F F002      00050         CALL    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
-000166 0E00           00051         MOVLW   0x00                            ;Mueve un 0 Hex. a W
-000168 6EC9           00052         MOVWF   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
-00016A EC3F F002      00053         CALL    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
-00016E 8480           00054         BSF             LCD                                     ;Setea LCD (PortA,2)
+                            ====
+                      00042 ;Envia los datos a travez del puerto serial para configurar el puerto A del chip MCP23S17
+                      00043 ;=======================================================================================================
+                            ======
+00015C 9480           00044         BCF             LCD                                     ;Limpia LCD (PortA,2)
+00015E 0E40           00045         MOVLW   0x40                            ;Cargas un 40 Hexa. a W
+000160 6EC9           00046         MOVWF   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
+000162 EC43 F002      00047         CALL    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
+000166 0E00           00048         MOVLW   0x00                            ;Mueve un 0 Hex. a W
+000168 6EC9           00049         MOVWF   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
+00016A EC43 F002      00050         CALL    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
+00016E 0E00           00051         MOVLW   0x00                            ;Mueve un 0 Hex. a W
+000170 6EC9           00052         MOVWF   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
+000172 EC43 F002      00053         CALL    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
+000176 8480           00054         BSF             LCD                                     ;Setea LCD (PortA,2)
                       00055 ;==================================================CONFIG_PORTB=========================================
                             ====
                       00056 ;Envia los datos a travez del puerto serial para configurar el puerto B del chip MCP23S17
                       00057 ;=======================================================================================================
                             ======
-000170 9480           00058         bcf             LCD                                     ;Limpia LCD (PortA,2)
-000172 0E40           00059         movlw   0x40                            ;Cargas un 40 Hexa. a W
-000174 6EC9           00060         movwf   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
-000176 EC3F F002      00061         call    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
-00017A 0E01           00062         movlw   0x01                            ;Mueve un 1 Hex. a W
-00017C 6EC9           00063         movwf   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
-00017E EC3F F002      00064         call    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
-000182 0E00           00065         movlw   0x00                            ;Mueve un 0 Hex. a W
-000184 6EC9           00066         movwf   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
-000186 EC3F F002      00067         call    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
-00018A 8480           00068         bsf             LCD                                     ;Setea LCD (PortA,2)
-00018C 0012           00069         RETURN                                          ;Retorna a la siguiente linea del Call
+000178 9480           00058         bcf             LCD                                     ;Limpia LCD (PortA,2)
+00017A 0E40           00059         movlw   0x40                            ;Cargas un 40 Hexa. a W
+00017C 6EC9           00060         movwf   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
+00017E EC43 F002      00061         call    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
+000182 0E01           00062         movlw   0x01                            ;Mueve un 1 Hex. a W
+000184 6EC9           00063         movwf   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
+000186 EC43 F002      00064         call    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
+00018A 0E00           00065         movlw   0x00                            ;Mueve un 0 Hex. a W
+00018C 6EC9           00066         movwf   SSP1BUF                         ;Envia lo que esta en W al Bufer del SPI
+00018E EC43 F002      00067         call    CHEK                            ;Llama a Chek para revisar si ya se envio el dato
+000192 8480           00068         bsf             LCD                                     ;Setea LCD (PortA,2)
+000194 0012           00069         RETURN                                          ;Retorna a la siguiente linea del Call
                       00070 ;===================================================INICIALIZA LCD======================================
                             =========
                       00071 ;Configura el LCD como:8 Bits, N°de lineas=2, Caracter =5x7, cursor apagado,incrementa posicion de curso
                             r y texto no se desplaza
                       00072 ;=======================================================================================================
                             =========
-00018E                00073 INI_LCD
-00018E 0E7F           00074         MOVLW   B'01111111'                     ;RS=0 /ENVIA INSTRUCCION Y E=1 /HABILITA EL MODULO LCD
-000190 6E00           00075         MOVWF   VALA                            ;Carga lo que esta en W a la variable VALA que represent
+000196                00073 INI_LCD
+000196 0E7F           00074         MOVLW   B'01111111'                     ;RS=0 /ENVIA INSTRUCCION Y E=1 /HABILITA EL MODULO LCD
+000198 6E00           00075         MOVWF   VALA                            ;Carga lo que esta en W a la variable VALA que represent
                             a el puerto A del MCP23S17
-000192 0E38           00076         MOVLW   B'00111000'                     ;Instruccion que se quiere enviar al LCD(bus de 8 Bits, 
+00019A 0E38           00076         MOVLW   B'00111000'                     ;Instruccion que se quiere enviar al LCD(bus de 8 Bits, 
                             N°de lineas=2, Caracter =5x7)
-000194 6E01           00077         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
+00019C 6E01           00077         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
                             a el puerto B del MCP23S17
-000196 ECE2 F001      00078         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
+00019E ECE6 F001      00078         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
                              datos por el SPI
-00019A 0E0C           00079         MOVLW   B'00001100'                     ;Instruccion que se quiere enviar al LCD(Pantalla encend
+0001A2 0E0C           00079         MOVLW   B'00001100'                     ;Instruccion que se quiere enviar al LCD(Pantalla encend
                             ida, Cursor apagado y sin intermitencia)
-00019C 6E01           00080         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
+0001A4 6E01           00080         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
                             a el puerto B del MCP23S17
-00019E ECE2 F001      00081         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
-                             datos por el SPI
-0001A2 0E01           00082         MOVLW   B'00000001'                     ;Instruccion que se quiere enviar al LCD(Limpia la panta
-                            lla y retorna a HOME)
-0001A4 6E01           00083         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  7
+0001A6 ECE6 F001      00081         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                            a el puerto B del MCP23S17
-0001A6 ECE2 F001      00084         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
                              datos por el SPI
-0001AA 0E06           00085         MOVLW   B'00000110'                     ;Instruccion que se quiere enviar al LCD(Incrementa posi
+0001AA 0E01           00082         MOVLW   B'00000001'                     ;Instruccion que se quiere enviar al LCD(Limpia la panta
+                            lla y retorna a HOME)
+0001AC 6E01           00083         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
+                            a el puerto B del MCP23S17
+0001AE ECE6 F001      00084         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
+                             datos por el SPI
+0001B2 0E06           00085         MOVLW   B'00000110'                     ;Instruccion que se quiere enviar al LCD(Incrementa posi
                             cion de cursor y texto no se desplaza)
-0001AC 6E01           00086         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
+0001B4 6E01           00086         MOVWF   VALB                            ;Carga lo que esta en W a la variable VALB que represent
                             a el puerto B del MCP23S17
-0001AE ECE2 F001      00087         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
+0001B6 ECE6 F001      00087         CALL    INSTRUCCION                     ;Llama a rutina instruccion qeu se encarga de enviar los
                              datos por el SPI
-0001B2 0012           00088         RETURN
+0001BA 0012           00088         RETURN
                       00089 ;=============================================RUTINA PRINT==============================================
                             ========
                       00090 ;Rutina que carga el contenido de W en la variable VALB para que esta sea enviada por el puerto serial (
                             SPI)
                       00091 ;=======================================================================================================
                             ========
-0001B4                00092 PRINT
-0001B4 6E01           00093         MOVWF   VALB                            ;Carga lo que viene en W a la variable VALB que represen
+0001BC                00092 PRINT
+0001BC 6E01           00093         MOVWF   VALB                            ;Carga lo que viene en W a la variable VALB que represen
                             ta el puero B del MCP23S17
-0001B6 ECE2 F001      00094         CALL    INSTRUCCION                     ;Llama a INSTRUCCION (Rurina que se encarga de enviar lo
+0001BE ECE6 F001      00094         CALL    INSTRUCCION                     ;Llama a INSTRUCCION (Rurina que se encarga de enviar lo
                             s datos por el SPI)
-0001BA 0012           00095         RETURN                                          ;Retorna del LLamado
+0001C2 0012           00095         RETURN                                          ;Retorna del LLamado
                       00096 ;=============================================PRINT_LETRA===============================================
                             =======
                       00097 ;Rutina que carga una letra en W y la envia a  VALB para que esta sea enviada por el puerto serial (SPI)
                       00098 ;=======================================================================================================
                             ========
-0001BC                00099 PRINT_A
-0001BC 0E41           00100         MOVLW   'A'
-0001BE ECDA F000      00101         CALL    PRINT
-0001C2 0012           00102         RETURN
-0001C4                00103 PRINT_B
-0001C4 0E42           00104         MOVLW   'B'
-0001C6 ECDA F000      00105         CALL    PRINT
-0001CA 0012           00106         RETURN
-0001CC                00107 PRINT_C
-0001CC 0E43           00108         MOVLW   'C'
-0001CE ECDA F000      00109         CALL    PRINT
-0001D2 0012           00110         RETURN
-0001D4                00111 PRINT_D
-0001D4 0E44           00112         MOVLW   'D'
-0001D6 ECDA F000      00113         CALL    PRINT
-0001DA 0012           00114         RETURN
-0001DC                00115 PRINT_E
-0001DC 0E45           00116         MOVLW   'E'
-0001DE ECDA F000      00117         CALL    PRINT
-0001E2 0012           00118         RETURN
-0001E4                00119 PRINT_F
-0001E4 0E46           00120         MOVLW   'F'
-0001E6 ECDA F000      00121         CALL    PRINT
-0001EA 0012           00122         RETURN
-0001EC                00123 PRINT_G
-0001EC 0E47           00124         MOVLW   'G'
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  8
+0001C4                00099 PRINT_A
+0001C4 0E41           00100         MOVLW   'A'
+0001C6 ECDE F000      00101         CALL    PRINT
+0001CA 0012           00102         RETURN
+0001CC                00103 PRINT_B
+0001CC 0E42           00104         MOVLW   'B'
+0001CE ECDE F000      00105         CALL    PRINT
+0001D2 0012           00106         RETURN
+0001D4                00107 PRINT_C
+0001D4 0E43           00108         MOVLW   'C'
+0001D6 ECDE F000      00109         CALL    PRINT
+0001DA 0012           00110         RETURN
+0001DC                00111 PRINT_D
+0001DC 0E44           00112         MOVLW   'D'
+0001DE ECDE F000      00113         CALL    PRINT
+0001E2 0012           00114         RETURN
+0001E4                00115 PRINT_E
+0001E4 0E45           00116         MOVLW   'E'
+0001E6 ECDE F000      00117         CALL    PRINT
+0001EA 0012           00118         RETURN
+0001EC                00119 PRINT_F
+0001EC 0E46           00120         MOVLW   'F'
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0001EE ECDA F000      00125         CALL    PRINT
-0001F2 0012           00126         RETURN
-0001F4                00127 PRINT_H
-0001F4 0E48           00128         MOVLW   'H'
-0001F6 ECDA F000      00129         CALL    PRINT
-0001FA 0012           00130         RETURN
-0001FC                00131 PRINT_I
-0001FC 0E49           00132         MOVLW   'I'
-0001FE ECDA F000      00133         CALL    PRINT
-000202 0012           00134         RETURN
-000204                00135 PRINT_J
-000204 0E4A           00136         MOVLW   'J'
-000206 ECDA F000      00137         CALL    PRINT
-00020A 0012           00138         RETURN
-00020C                00139 PRINT_K
-00020C 0E4B           00140         MOVLW   'K'
-00020E ECDA F000      00141         CALL    PRINT
-000212 0012           00142         RETURN
-000214                00143 PRINT_L
-000214 0E4C           00144         MOVLW   'L'
-000216 ECDA F000      00145         CALL    PRINT
-00021A 0012           00146         RETURN
-00021C                00147 PRINT_M
-00021C 0E4D           00148         MOVLW   'M'
-00021E ECDA F000      00149         CALL    PRINT
-000222 0012           00150         RETURN
-000224                00151 PRINT_N
-000224 0E4E           00152         MOVLW   'N'
-000226 ECDA F000      00153         CALL    PRINT
-00022A 0012           00154         RETURN
-00022C                00155 PRINT_Ñ
-00022C 0ED1           00156         MOVLW   'Ñ'
-00022E ECDA F000      00157         CALL    PRINT
-000232 0012           00158         RETURN
-000234                00159 PRINT_O
-000234 0E4F           00160         MOVLW   'O'
-000236 ECDA F000      00161         CALL    PRINT
-00023A 0012           00162         RETURN
-00023C                00163 PRINT_P
-00023C 0E50           00164         MOVLW   'P'
-00023E ECDA F000      00165         CALL    PRINT
-000242 0012           00166         RETURN
-000244                00167 PRINT_Q
-000244 0E51           00168         MOVLW   'Q'
-000246 ECDA F000      00169         CALL    PRINT
-00024A 0012           00170         RETURN
-00024C                00171 PRINT_R
-00024C 0E52           00172         MOVLW   'R'
-00024E ECDA F000      00173         CALL    PRINT
-000252 0012           00174         RETURN
-000254                00175 PRINT_S
-000254 0E53           00176         MOVLW   'S'
-000256 ECDA F000      00177         CALL    PRINT
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE  9
+0001EE ECDE F000      00121         CALL    PRINT
+0001F2 0012           00122         RETURN
+0001F4                00123 PRINT_G
+0001F4 0E47           00124         MOVLW   'G'
+0001F6 ECDE F000      00125         CALL    PRINT
+0001FA 0012           00126         RETURN
+0001FC                00127 PRINT_H
+0001FC 0E48           00128         MOVLW   'H'
+0001FE ECDE F000      00129         CALL    PRINT
+000202 0012           00130         RETURN
+000204                00131 PRINT_I
+000204 0E49           00132         MOVLW   'I'
+000206 ECDE F000      00133         CALL    PRINT
+00020A 0012           00134         RETURN
+00020C                00135 PRINT_J
+00020C 0E4A           00136         MOVLW   'J'
+00020E ECDE F000      00137         CALL    PRINT
+000212 0012           00138         RETURN
+000214                00139 PRINT_K
+000214 0E4B           00140         MOVLW   'K'
+000216 ECDE F000      00141         CALL    PRINT
+00021A 0012           00142         RETURN
+00021C                00143 PRINT_L
+00021C 0E4C           00144         MOVLW   'L'
+00021E ECDE F000      00145         CALL    PRINT
+000222 0012           00146         RETURN
+000224                00147 PRINT_M
+000224 0E4D           00148         MOVLW   'M'
+000226 ECDE F000      00149         CALL    PRINT
+00022A 0012           00150         RETURN
+00022C                00151 PRINT_N
+00022C 0E4E           00152         MOVLW   'N'
+00022E ECDE F000      00153         CALL    PRINT
+000232 0012           00154         RETURN
+000234                00155 PRINT_Ñ
+000234 0ED1           00156         MOVLW   'Ñ'
+000236 ECDE F000      00157         CALL    PRINT
+00023A 0012           00158         RETURN
+00023C                00159 PRINT_O
+00023C 0E4F           00160         MOVLW   'O'
+00023E ECDE F000      00161         CALL    PRINT
+000242 0012           00162         RETURN
+000244                00163 PRINT_P
+000244 0E50           00164         MOVLW   'P'
+000246 ECDE F000      00165         CALL    PRINT
+00024A 0012           00166         RETURN
+00024C                00167 PRINT_Q
+00024C 0E51           00168         MOVLW   'Q'
+00024E ECDE F000      00169         CALL    PRINT
+000252 0012           00170         RETURN
+000254                00171 PRINT_R
+000254 0E52           00172         MOVLW   'R'
+000256 ECDE F000      00173         CALL    PRINT
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00025A 0012           00178         RETURN
-00025C                00179 PRINT_T
-00025C 0E54           00180         MOVLW   'T'
-00025E ECDA F000      00181         CALL    PRINT
-000262 0012           00182         RETURN
-000264                00183 PRINT_U
-000264 0E55           00184         MOVLW   'U'
-000266 ECDA F000      00185         CALL    PRINT
-00026A 0012           00186         RETURN
-00026C                00187 PRINT_V
-00026C 0E56           00188         MOVLW   'V'
-00026E ECDA F000      00189         CALL    PRINT
-000272 0012           00190         RETURN
-000274                00191 PRINT_W
-000274 0E57           00192         MOVLW   'W'
-000276 ECDA F000      00193         CALL    PRINT
-00027A 0012           00194         RETURN
-00027C                00195 PRINT_X
-00027C 0E58           00196         MOVLW   'X'
-00027E ECDA F000      00197         CALL    PRINT
-000282 0012           00198         RETURN
-000284                00199 PRINT_Y
-000284 0E59           00200         MOVLW   'Y'
-000286 ECDA F000      00201         CALL    PRINT
-00028A 0012           00202         RETURN
-00028C                00203 PRINT_Z
-00028C 0E5A           00204         MOVLW   'Z'
-00028E ECDA F000      00205         CALL    PRINT
-000292 0012           00206         RETURN
-000294                00207 PRINT_a
-000294 0E61           00208         MOVLW   'a'
-000296 ECDA F000      00209         CALL    PRINT
-00029A 0012           00210         RETURN
-00029C                00211 PRINT_b
-00029C 0E62           00212         MOVLW   'b'
-00029E ECDA F000      00213         CALL    PRINT
-0002A2 0012           00214         RETURN
-0002A4                00215 PRINT_c
-0002A4 0E63           00216         MOVLW   'c'
-0002A6 ECDA F000      00217         CALL    PRINT
-0002AA 0012           00218         RETURN
-0002AC                00219 PRINT_d
-0002AC 0E64           00220         MOVLW   'd'
-0002AE ECDA F000      00221         CALL    PRINT
-0002B2 0012           00222         RETURN
-0002B4                00223 PRINT_e
-0002B4 0E65           00224         MOVLW   'e'
-0002B6 ECDA F000      00225         CALL    PRINT
-0002BA 0012           00226         RETURN
-0002BC                00227 PRINT_f
-0002BC 0E66           00228         MOVLW   'f'
-0002BE ECDA F000      00229         CALL    PRINT
-0002C2 0012           00230         RETURN
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 10
+00025A 0012           00174         RETURN
+00025C                00175 PRINT_S
+00025C 0E53           00176         MOVLW   'S'
+00025E ECDE F000      00177         CALL    PRINT
+000262 0012           00178         RETURN
+000264                00179 PRINT_T
+000264 0E54           00180         MOVLW   'T'
+000266 ECDE F000      00181         CALL    PRINT
+00026A 0012           00182         RETURN
+00026C                00183 PRINT_U
+00026C 0E55           00184         MOVLW   'U'
+00026E ECDE F000      00185         CALL    PRINT
+000272 0012           00186         RETURN
+000274                00187 PRINT_V
+000274 0E56           00188         MOVLW   'V'
+000276 ECDE F000      00189         CALL    PRINT
+00027A 0012           00190         RETURN
+00027C                00191 PRINT_W
+00027C 0E57           00192         MOVLW   'W'
+00027E ECDE F000      00193         CALL    PRINT
+000282 0012           00194         RETURN
+000284                00195 PRINT_X
+000284 0E58           00196         MOVLW   'X'
+000286 ECDE F000      00197         CALL    PRINT
+00028A 0012           00198         RETURN
+00028C                00199 PRINT_Y
+00028C 0E59           00200         MOVLW   'Y'
+00028E ECDE F000      00201         CALL    PRINT
+000292 0012           00202         RETURN
+000294                00203 PRINT_Z
+000294 0E5A           00204         MOVLW   'Z'
+000296 ECDE F000      00205         CALL    PRINT
+00029A 0012           00206         RETURN
+00029C                00207 PRINT_a
+00029C 0E61           00208         MOVLW   'a'
+00029E ECDE F000      00209         CALL    PRINT
+0002A2 0012           00210         RETURN
+0002A4                00211 PRINT_b
+0002A4 0E62           00212         MOVLW   'b'
+0002A6 ECDE F000      00213         CALL    PRINT
+0002AA 0012           00214         RETURN
+0002AC                00215 PRINT_c
+0002AC 0E63           00216         MOVLW   'c'
+0002AE ECDE F000      00217         CALL    PRINT
+0002B2 0012           00218         RETURN
+0002B4                00219 PRINT_d
+0002B4 0E64           00220         MOVLW   'd'
+0002B6 ECDE F000      00221         CALL    PRINT
+0002BA 0012           00222         RETURN
+0002BC                00223 PRINT_e
+0002BC 0E65           00224         MOVLW   'e'
+0002BE ECDE F000      00225         CALL    PRINT
+0002C2 0012           00226         RETURN
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0002C4                00231 PRINT_g
-0002C4 0E67           00232         MOVLW   'g'
-0002C6 ECDA F000      00233         CALL    PRINT
-0002CA 0012           00234         RETURN
-0002CC                00235 PRINT_h
-0002CC 0E68           00236         MOVLW   'h'
-0002CE ECDA F000      00237         CALL    PRINT
-0002D2 0012           00238         RETURN
-0002D4                00239 PRINT_i
-0002D4 0E69           00240         MOVLW   'i'
-0002D6 ECDA F000      00241         CALL    PRINT
-0002DA 0012           00242         RETURN
-0002DC                00243 PRINT_j
-0002DC 0E6A           00244         MOVLW   'j'
-0002DE ECDA F000      00245         CALL    PRINT
-0002E2 0012           00246         RETURN
-0002E4                00247 PRINT_k
-0002E4 0E6B           00248         MOVLW   'k'
-0002E6 ECDA F000      00249         CALL    PRINT
-0002EA 0012           00250         RETURN
-0002EC                00251 PRINT_l
-0002EC 0E6C           00252         MOVLW   'l'
-0002EE ECDA F000      00253         CALL    PRINT
-0002F2 0012           00254         RETURN
-0002F4                00255 PRINT_m
-0002F4 0E6D           00256         MOVLW   'm'
-0002F6 ECDA F000      00257         CALL    PRINT
-0002FA 0012           00258         RETURN
-0002FC                00259 PRINT_n
-0002FC 0E6E           00260         MOVLW   'n'
-0002FE ECDA F000      00261         CALL    PRINT
-000302 0012           00262         RETURN
-000304                00263 PRINT_ñ
-000304 0EF1           00264         MOVLW   'ñ'
-000306 ECDA F000      00265         CALL    PRINT
-00030A 0012           00266         RETURN
-00030C                00267 PRINT_o
-00030C 0E6F           00268         MOVLW   'o'
-00030E ECDA F000      00269         CALL    PRINT
-000312 0012           00270         RETURN
-000314                00271 PRINT_p
-000314 0E70           00272         MOVLW   'p'
-000316 ECDA F000      00273         CALL    PRINT
-00031A 0012           00274         RETURN
-00031C                00275 PRINT_q
-00031C 0E71           00276         MOVLW   'q'
-00031E ECDA F000      00277         CALL    PRINT
-000322 0012           00278         RETURN
-000324                00279 PRINT_r
-000324 0E72           00280         MOVLW   'r'
-000326 ECDA F000      00281         CALL    PRINT
-00032A 0012           00282         RETURN
-00032C                00283 PRINT_s
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 11
+0002C4                00227 PRINT_f
+0002C4 0E66           00228         MOVLW   'f'
+0002C6 ECDE F000      00229         CALL    PRINT
+0002CA 0012           00230         RETURN
+0002CC                00231 PRINT_g
+0002CC 0E67           00232         MOVLW   'g'
+0002CE ECDE F000      00233         CALL    PRINT
+0002D2 0012           00234         RETURN
+0002D4                00235 PRINT_h
+0002D4 0E68           00236         MOVLW   'h'
+0002D6 ECDE F000      00237         CALL    PRINT
+0002DA 0012           00238         RETURN
+0002DC                00239 PRINT_i
+0002DC 0E69           00240         MOVLW   'i'
+0002DE ECDE F000      00241         CALL    PRINT
+0002E2 0012           00242         RETURN
+0002E4                00243 PRINT_j
+0002E4 0E6A           00244         MOVLW   'j'
+0002E6 ECDE F000      00245         CALL    PRINT
+0002EA 0012           00246         RETURN
+0002EC                00247 PRINT_k
+0002EC 0E6B           00248         MOVLW   'k'
+0002EE ECDE F000      00249         CALL    PRINT
+0002F2 0012           00250         RETURN
+0002F4                00251 PRINT_l
+0002F4 0E6C           00252         MOVLW   'l'
+0002F6 ECDE F000      00253         CALL    PRINT
+0002FA 0012           00254         RETURN
+0002FC                00255 PRINT_m
+0002FC 0E6D           00256         MOVLW   'm'
+0002FE ECDE F000      00257         CALL    PRINT
+000302 0012           00258         RETURN
+000304                00259 PRINT_n
+000304 0E6E           00260         MOVLW   'n'
+000306 ECDE F000      00261         CALL    PRINT
+00030A 0012           00262         RETURN
+00030C                00263 PRINT_ñ
+00030C 0EF1           00264         MOVLW   'ñ'
+00030E ECDE F000      00265         CALL    PRINT
+000312 0012           00266         RETURN
+000314                00267 PRINT_o
+000314 0E6F           00268         MOVLW   'o'
+000316 ECDE F000      00269         CALL    PRINT
+00031A 0012           00270         RETURN
+00031C                00271 PRINT_p
+00031C 0E70           00272         MOVLW   'p'
+00031E ECDE F000      00273         CALL    PRINT
+000322 0012           00274         RETURN
+000324                00275 PRINT_q
+000324 0E71           00276         MOVLW   'q'
+000326 ECDE F000      00277         CALL    PRINT
+00032A 0012           00278         RETURN
+00032C                00279 PRINT_r
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00032C 0E73           00284         MOVLW   's'
-00032E ECDA F000      00285         CALL    PRINT
-000332 0012           00286         RETURN
-000334                00287 PRINT_t
-000334 0E74           00288         MOVLW   't'
-000336 ECDA F000      00289         CALL    PRINT
-00033A 0012           00290         RETURN
-00033C                00291 PRINT_u
-00033C 0E75           00292         MOVLW   'u'
-00033E ECDA F000      00293         CALL    PRINT
-000342 0012           00294         RETURN
-000344                00295 PRINT_v
-000344 0E76           00296         MOVLW   'v'
-000346 ECDA F000      00297         CALL    PRINT
-00034A 0012           00298         RETURN
-00034C                00299 PRINT_w
-00034C 0E77           00300         MOVLW   'w'
-00034E ECDA F000      00301         CALL    PRINT
-000352 0012           00302         RETURN
-000354                00303 PRINT_x
-000354 0E78           00304         MOVLW   'x'
-000356 ECDA F000      00305         CALL    PRINT
-00035A 0012           00306         RETURN
-00035C                00307 PRINT_y
-00035C 0E79           00308         MOVLW   'y'
-00035E ECDA F000      00309         CALL    PRINT
-000362 0012           00310         RETURN
-000364                00311 PRINT_z
-000364 0E7A           00312         MOVLW   'z'
-000366 ECDA F000      00313         CALL    PRINT
-00036A 0012           00314         RETURN
-00036C                00315 PRINT_
-00036C 0E20           00316         MOVLW   ' '
-00036E ECDA F000      00317         CALL    PRINT
-000372 0012           00318         RETURN
-000374                00319 PRINT_1
-000374 0E31           00320         MOVLW   '1'
-000376 ECDA F000      00321         CALL    PRINT
-00037A 0012           00322         RETURN
-00037C                00323 PRINT_2
-00037C 0E32           00324         MOVLW   '2'
-00037E ECDA F000      00325         CALL    PRINT
-000382 0012           00326         RETURN
-000384                00327 PRINT_3
-000384 0E33           00328         MOVLW   '3'
-000386 ECDA F000      00329         CALL    PRINT
-00038A 0012           00330         RETURN
-00038C                00331 PRINT_4
-00038C 0E34           00332         MOVLW   '4'
-00038E ECDA F000      00333         CALL    PRINT
-000392 0012           00334         RETURN
-000394                00335 PRINT_5
-000394 0E35           00336         MOVLW   '5'
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 12
+00032C 0E72           00280         MOVLW   'r'
+00032E ECDE F000      00281         CALL    PRINT
+000332 0012           00282         RETURN
+000334                00283 PRINT_s
+000334 0E73           00284         MOVLW   's'
+000336 ECDE F000      00285         CALL    PRINT
+00033A 0012           00286         RETURN
+00033C                00287 PRINT_t
+00033C 0E74           00288         MOVLW   't'
+00033E ECDE F000      00289         CALL    PRINT
+000342 0012           00290         RETURN
+000344                00291 PRINT_u
+000344 0E75           00292         MOVLW   'u'
+000346 ECDE F000      00293         CALL    PRINT
+00034A 0012           00294         RETURN
+00034C                00295 PRINT_v
+00034C 0E76           00296         MOVLW   'v'
+00034E ECDE F000      00297         CALL    PRINT
+000352 0012           00298         RETURN
+000354                00299 PRINT_w
+000354 0E77           00300         MOVLW   'w'
+000356 ECDE F000      00301         CALL    PRINT
+00035A 0012           00302         RETURN
+00035C                00303 PRINT_x
+00035C 0E78           00304         MOVLW   'x'
+00035E ECDE F000      00305         CALL    PRINT
+000362 0012           00306         RETURN
+000364                00307 PRINT_y
+000364 0E79           00308         MOVLW   'y'
+000366 ECDE F000      00309         CALL    PRINT
+00036A 0012           00310         RETURN
+00036C                00311 PRINT_z
+00036C 0E7A           00312         MOVLW   'z'
+00036E ECDE F000      00313         CALL    PRINT
+000372 0012           00314         RETURN
+000374                00315 PRINT_
+000374 0E20           00316         MOVLW   ' '
+000376 ECDE F000      00317         CALL    PRINT
+00037A 0012           00318         RETURN
+00037C                00319 PRINT_1
+00037C 0E31           00320         MOVLW   '1'
+00037E ECDE F000      00321         CALL    PRINT
+000382 0012           00322         RETURN
+000384                00323 PRINT_2
+000384 0E32           00324         MOVLW   '2'
+000386 ECDE F000      00325         CALL    PRINT
+00038A 0012           00326         RETURN
+00038C                00327 PRINT_3
+00038C 0E33           00328         MOVLW   '3'
+00038E ECDE F000      00329         CALL    PRINT
+000392 0012           00330         RETURN
+000394                00331 PRINT_4
+000394 0E34           00332         MOVLW   '4'
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000396 ECDA F000      00337         CALL    PRINT
-00039A 0012           00338         RETURN
-00039C                00339 PRINT_6
-00039C 0E36           00340         MOVLW   '6'
-00039E ECDA F000      00341         CALL    PRINT
-0003A2 0012           00342         RETURN
-0003A4                00343 PRINT_7
-0003A4 0E37           00344         MOVLW   '7'
-0003A6 ECDA F000      00345         CALL    PRINT
-0003AA 0012           00346         RETURN
-0003AC                00347 PRINT_8
-0003AC 0E38           00348         MOVLW   '8'
-0003AE ECDA F000      00349         CALL    PRINT
-0003B2 0012           00350         RETURN
-0003B4                00351 PRINT_9
-0003B4 0E39           00352         MOVLW   '9'
-0003B6 ECDA F000      00353         CALL    PRINT
-0003BA 0012           00354         RETURN
-0003BC                00355 PRINT_0
-0003BC 0E30           00356         MOVLW   '0'
-0003BE ECDA F000      00357         CALL    PRINT
-0003C2 0012           00358         RETURN
+000396 ECDE F000      00333         CALL    PRINT
+00039A 0012           00334         RETURN
+00039C                00335 PRINT_5
+00039C 0E35           00336         MOVLW   '5'
+00039E ECDE F000      00337         CALL    PRINT
+0003A2 0012           00338         RETURN
+0003A4                00339 PRINT_6
+0003A4 0E36           00340         MOVLW   '6'
+0003A6 ECDE F000      00341         CALL    PRINT
+0003AA 0012           00342         RETURN
+0003AC                00343 PRINT_7
+0003AC 0E37           00344         MOVLW   '7'
+0003AE ECDE F000      00345         CALL    PRINT
+0003B2 0012           00346         RETURN
+0003B4                00347 PRINT_8
+0003B4 0E38           00348         MOVLW   '8'
+0003B6 ECDE F000      00349         CALL    PRINT
+0003BA 0012           00350         RETURN
+0003BC                00351 PRINT_9
+0003BC 0E39           00352         MOVLW   '9'
+0003BE ECDE F000      00353         CALL    PRINT
+0003C2 0012           00354         RETURN
+0003C4                00355 PRINT_0
+0003C4 0E30           00356         MOVLW   '0'
+0003C6 ECDE F000      00357         CALL    PRINT
+0003CA 0012           00358         RETURN
                       00359 
                       00360 ;====================================================DATA_SEND==========================================
                             ========
@@ -687,132 +691,132 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             =======
                       00365 ;===========================================Deshabilita LCD E=0=========================================
                             =======
-0003C4                00366 INSTRUCCION
-0003C4 010F           00367         BANKSEL PORTA                           ;Cambia de banco
-0003C6 9480           00368         BCF             LCD                                     ;Deshabilita el LCD
-0003C8 010F           00369         BANKSEL SSP1BUF                         ;Cambia de banco
-0003CA 969E           00370         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-0003CC 0E40           00371         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
-0003CE 6EC9           00372         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-0003D0 EC3F F002      00373         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+0003CC                00366 INSTRUCCION
+0003CC 010F           00367         BANKSEL PORTA                           ;Cambia de banco
+0003CE 9480           00368         BCF             LCD                                     ;Deshabilita el LCD
+0003D0 010F           00369         BANKSEL SSP1BUF                         ;Cambia de banco
+0003D2 969E           00370         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+0003D4 0E40           00371         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
+0003D6 6EC9           00372         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+0003D8 EC43 F002      00373         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-0003D4 010F           00374         BANKSEL PIR1                            ;Cambia de banco
-0003D6 969E           00375         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-0003D8 0E12           00376         MOVLW   0X12                            ;Carga la direccion del puero A del MCP23S17
-0003DA 6EC9           00377         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-0003DC EC3F F002      00378         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+0003DC 010F           00374         BANKSEL PIR1                            ;Cambia de banco
+0003DE 969E           00375         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+0003E0 0E12           00376         MOVLW   0X12                            ;Carga la direccion del puero A del MCP23S17
+0003E2 6EC9           00377         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+0003E4 EC43 F002      00378         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-0003E0 010F           00379         BANKSEL PIR1                            ;Cambia de banco
-0003E2 969E           00380         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-0003E4 0E3F           00381         MOVLW   B'00111111'                     ;RS=0 Y E=0
-0003E6 6EC9           00382         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 13
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0003E8 EC3F F002      00383         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+0003E8 010F           00379         BANKSEL PIR1                            ;Cambia de banco
+0003EA 969E           00380         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+0003EC 0E3F           00381         MOVLW   B'00111111'                     ;RS=0 Y E=0
+0003EE 6EC9           00382         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+0003F0 EC43 F002      00383         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-0003EC 010F           00384         BANKSEL PORTA                           ;Cambia de banco
-0003EE 8480           00385         BSF             LCD                                     ;Habilita el LCD
+0003F4 010F           00384         BANKSEL PORTA                           ;Cambia de banco
+0003F6 8480           00385         BSF             LCD                                     ;Habilita el LCD
                       00386 ;=====================================IMPRIME DATO B============================================
-0003F0 010F           00387         BANKSEL PORTA                           ;Cambia de banco
-0003F2 9480           00388         BCF             LCD                                     ;Deshabilita el LCD
-0003F4 010F           00389         BANKSEL SSP1BUF                         ;Cambia de banco
-0003F6 969E           00390         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-0003F8 0E40           00391         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
-0003FA 6EC9           00392         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-0003FC EC3F F002      00393         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+0003F8 010F           00387         BANKSEL PORTA                           ;Cambia de banco
+0003FA 9480           00388         BCF             LCD                                     ;Deshabilita el LCD
+0003FC 010F           00389         BANKSEL SSP1BUF                         ;Cambia de banco
+0003FE 969E           00390         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+000400 0E40           00391         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
+000402 6EC9           00392         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000404 EC43 F002      00393         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-000400 010F           00394         BANKSEL PIR1                            ;Cambia de banco
-000402 969E           00395         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000404 0E13           00396         MOVLW   0X13                            ;Carga la direccion del puero B del MCP23S17
-000406 6EC9           00397         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-000408 EC3F F002      00398         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+000408 010F           00394         BANKSEL PIR1                            ;Cambia de banco
+00040A 969E           00395         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+00040C 0E13           00396         MOVLW   0X13                            ;Carga la direccion del puero B del MCP23S17
+00040E 6EC9           00397         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000410 EC43 F002      00398         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-00040C 010F           00399         BANKSEL PIR1                            ;Cambia de banco
-00040E 969E           00400         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000410 0100           00401         BANKSEL VALB                            ;Cambia de banco
-000412 5001           00402         MOVF    VALB,W                          ;Carga el contenido de VALB a W para ser enviado por el 
+000414 010F           00399         BANKSEL PIR1                            ;Cambia de banco
+000416 969E           00400         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+000418 0100           00401         BANKSEL VALB                            ;Cambia de banco
+00041A 5001           00402         MOVF    VALB,W                          ;Carga el contenido de VALB a W para ser enviado por el 
                             SPI
-000414 010F           00403         BANKSEL PIR1                            ;Cambia de banco
-000416 6EC9           00404         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-000418 EC3F F002      00405         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+00041C 010F           00403         BANKSEL PIR1                            ;Cambia de banco
+00041E 6EC9           00404         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000420 EC43 F002      00405         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-00041C 010F           00406         BANKSEL PORTA                           ;Cambia de banco
-00041E 8480           00407         BSF             LCD                                     ;Habilita el LCD
+000424 010F           00406         BANKSEL PORTA                           ;Cambia de banco
+000426 8480           00407         BSF             LCD                                     ;Habilita el LCD
                       00408 ;=========================================IMPRIME DATO A (RS Y E)=======================================
                             ========
-000420 010F           00409         BANKSEL PORTA                           ;Cambia de banco
-000422 9480           00410         BCF             LCD                                     ;Deshabilita el LCD
-000424 010F           00411         BANKSEL SSP1BUF                         ;Cambia de banco
-000426 969E           00412         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000428 0E40           00413         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
-00042A 6EC9           00414         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-00042C EC3F F002      00415         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+000428 010F           00409         BANKSEL PORTA                           ;Cambia de banco
+00042A 9480           00410         BCF             LCD                                     ;Deshabilita el LCD
+00042C 010F           00411         BANKSEL SSP1BUF                         ;Cambia de banco
+00042E 969E           00412         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+000430 0E40           00413         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
+000432 6EC9           00414         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000434 EC43 F002      00415         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-000430 010F           00416         BANKSEL PIR1                            ;Cambia de banco
-000432 969E           00417         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000434 0E12           00418         MOVLW   0X12                            ;Carga la direccion del puero A del MCP23S17
-000436 6EC9           00419         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-000438 EC3F F002      00420         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+000438 010F           00416         BANKSEL PIR1                            ;Cambia de banco
+00043A 969E           00417         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+00043C 0E12           00418         MOVLW   0X12                            ;Carga la direccion del puero A del MCP23S17
+00043E 6EC9           00419         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000440 EC43 F002      00420         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-00043C 010F           00421         BANKSEL PIR1                            ;Cambia de banco
-00043E 969E           00422         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000440 0100           00423         BANKSEL VALB                            ;Cambia de banco
-000442 5000           00424         MOVF    VALA,W                          ;Carga el contenido de VALA a W para ser enviado por el 
-                            SPI
-000444 010F           00425         BANKSEL PIR1                            ;Cambia de banco
-000446 6EC9           00426         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 14
+000444 010F           00421         BANKSEL PIR1                            ;Cambia de banco
+000446 969E           00422         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+000448 0100           00423         BANKSEL VALB                            ;Cambia de banco
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-000448 EC3F F002      00427         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+00044A 5000           00424         MOVF    VALA,W                          ;Carga el contenido de VALA a W para ser enviado por el 
+                            SPI
+00044C 010F           00425         BANKSEL PIR1                            ;Cambia de banco
+00044E 6EC9           00426         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000450 EC43 F002      00427         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-00044C 010F           00428         BANKSEL PORTA                           ;Cambia de banco
-00044E 8480           00429         BSF             LCD                                     ;Habilita el LCD
+000454 010F           00428         BANKSEL PORTA                           ;Cambia de banco
+000456 8480           00429         BSF             LCD                                     ;Habilita el LCD
                       00430 ;===========================================Deshabilita LCD E=0=========================================
                             =======
-000450 010F           00431         BANKSEL PORTA                           ;Cambia de banco
-000452 9480           00432         BCF             LCD                                     ;Deshabilita el LCD
-000454 010F           00433         BANKSEL SSP1BUF                         ;Cambia de banco
-000456 969E           00434         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000458 0E40           00435         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
-00045A 6EC9           00436         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-00045C EC3F F002      00437         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+000458 010F           00431         BANKSEL PORTA                           ;Cambia de banco
+00045A 9480           00432         BCF             LCD                                     ;Deshabilita el LCD
+00045C 010F           00433         BANKSEL SSP1BUF                         ;Cambia de banco
+00045E 969E           00434         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+000460 0E40           00435         MOVLW   b'01000000'                     ;Carga el OPCODE del MCP23S17 (Direccion =000)
+000462 6EC9           00436         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000464 EC43 F002      00437         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-000460 010F           00438         BANKSEL PIR1                            ;Cambia de banco
-000462 969E           00439         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000464 0E12           00440         MOVLW   0X12                            ;Carga la direccion del puero A del MCP23S17
-000466 6EC9           00441         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-000468 EC3F F002      00442         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+000468 010F           00438         BANKSEL PIR1                            ;Cambia de banco
+00046A 969E           00439         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+00046C 0E12           00440         MOVLW   0X12                            ;Carga la direccion del puero A del MCP23S17
+00046E 6EC9           00441         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+000470 EC43 F002      00442         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-00046C 010F           00443         BANKSEL PIR1                            ;Cambia de banco
-00046E 969E           00444         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
-000470 0E3F           00445         MOVLW   B'00111111'                     ;RS=0 Y E=0
-000472 6EC9           00446         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
-000474 EC3F F002      00447         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
+000474 010F           00443         BANKSEL PIR1                            ;Cambia de banco
+000476 969E           00444         BCF             PIR1,SSP1IF                     ;Limpia el Flag de transmicion de datos
+000478 0E3F           00445         MOVLW   B'00111111'                     ;RS=0 Y E=0
+00047A 6EC9           00446         MOVWF   SSP1BUF                         ;Envia el dato que esta en W al Bufer del SPI
+00047C EC43 F002      00447         CALL    CHEK                            ;Llama a la rutina CHEK que verifica si ya se envio el d
                             ato
-000478 010F           00448         BANKSEL PORTA                           ;Cambia de banco
-00047A 8480           00449         BSF             LCD                                     ;Habilita el LCD
-00047C 0012           00450         RETURN                                          ;Retorna a la siguiente linea del CALL que llamo
+000480 010F           00448         BANKSEL PORTA                           ;Cambia de banco
+000482 8480           00449         BSF             LCD                                     ;Habilita el LCD
+000484 0012           00450         RETURN                                          ;Retorna a la siguiente linea del CALL que llamo
                              a la rutina
                       00451 ;===================================================CHEQUEO_SPI=========================================
                             =====
-00047E                00452 CHEK
-00047E A69E           00453         BTFSS   PIR1,SSP1IF                     ;Revisa si el Flag de transmicion de datos esta encendid
+000486                00452 CHEK
+000486 A69E           00453         BTFSS   PIR1,SSP1IF                     ;Revisa si el Flag de transmicion de datos esta encendid
                             o
-000480 EF3F F002      00454         GOTO    $-2                                     ;No, vuelve a preguntar
-000484 969E           00455         BCF             PIR1,SSP1IF                     ;Si, Limpia el Flag de transmicion de datos
-000486 50C9           00456         MOVF    SSP1BUF,w                       ;Mueve a W lo que esta en bufer del SPI (SSP1BUF)
-000488 0012           00457         RETURN                                          ;Retorna a la siguiente linea del CALL que llamo
+000488 EF43 F002      00454         GOTO    $-2                                     ;No, vuelve a preguntar
+00048C 969E           00455         BCF             PIR1,SSP1IF                     ;Si, Limpia el Flag de transmicion de datos
+00048E 50C9           00456         MOVF    SSP1BUF,w                       ;Mueve a W lo que esta en bufer del SPI (SSP1BUF)
+000490 0012           00457         RETURN                                          ;Retorna a la siguiente linea del CALL que llamo
                              a la rutina
-                      00190                         END
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 15
+                      00194                         END
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 15
 
 
 SYMBOL TABLE
@@ -871,7 +875,7 @@ AN1                               00000001
 AN10                              00000005
 AN11                              00000006
 AN12                              00000004
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 16
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 16
 
 
 SYMBOL TABLE
@@ -930,7 +934,7 @@ CCP1X                             00000005
 CCP1Y                             00000004
 CCP2CON                           00000FBA
 CCP2IE                            00000000
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 17
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 17
 
 
 SYMBOL TABLE
@@ -989,7 +993,7 @@ CCPR4                             00000F74
 CCPR4H                            00000F75
 CCPR4L                            00000F74
 CCPR5                             00000F71
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 18
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 18
 
 
 SYMBOL TABLE
@@ -999,7 +1003,7 @@ CCPR5H                            00000F72
 CCPR5L                            00000F71
 CE                                00000005
 CFGS                              00000006
-CHEK                              0000047E
+CHEK                              00000486
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
@@ -1019,7 +1023,7 @@ CMIE                              00000006
 CMIF                              00000006
 CMIP                              00000006
 CONF                              00000042
-CONFIG_SPI                        00000144
+CONFIG_SPI                        0000014C
 CONT                              00000021
 CONT2                             00000022
 CREN                              00000004
@@ -1048,7 +1052,7 @@ DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
 DC3B0                             00000004
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 19
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 19
 
 
 SYMBOL TABLE
@@ -1072,7 +1076,7 @@ DDRF                              00000F97
 DDRG                              00000F98
 DDRH                              00000F99
 DDRJ                              00000F9A
-DELAY                             000000BA
+DELAY                             000000C2
 DONE                              00000001
 DT1                               00000007
 DT2                               00000002
@@ -1107,7 +1111,7 @@ ECCP3CON                          00000FB7
 ECCP3DEL                          00000F69
 ECCPAS0                           00000004
 ECCPAS1                           00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 20
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 20
 
 
 SYMBOL TABLE
@@ -1124,9 +1128,9 @@ EEIE                              00000004
 EEIF                              00000004
 EEIP                              00000004
 EEPGD                             00000007
-ESCRIBIR                          000000D0
-ESCRIBIR_OFF                      00000124
-ESCRIBIR_ON                       0000010A
+ESCRIBIR                          000000D8
+ESCRIBIR_OFF                      0000012C
+ESCRIBIR_ON                       00000112
 FAST                              00000001
 FERR                              00000002
 FERR1                             00000002
@@ -1166,7 +1170,7 @@ I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 IBF                               00000007
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 21
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 21
 
 
 SYMBOL TABLE
@@ -1177,9 +1181,9 @@ IDLEN                             00000007
 INDF0                             00000FEF
 INDF1                             00000FE7
 INDF2                             00000FDF
-INICIO                            0000009A
-INI_LCD                           0000018E
-INSTRUCCION                       000003C4
+INICIO                            000000A2
+INI_LCD                           00000196
+INSTRUCCION                       000003CC
 INT0                              00000000
 INT0E                             00000004
 INT0F                             00000001
@@ -1225,7 +1229,7 @@ IRCF0                             00000004
 IRCF1                             00000005
 IRCF2                             00000006
 IRVST                             00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 22
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 22
 
 
 SYMBOL TABLE
@@ -1284,7 +1288,7 @@ LATE7                             00000007
 LATF                              00000F8E
 LATF0                             00000000
 LATF1                             00000001
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 23
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 23
 
 
 SYMBOL TABLE
@@ -1325,7 +1329,7 @@ LB                                00000006
 LCD                               PORTA,2
 LCD_EN                            VALA,6
 LCD_RS                            VALA,7
-LEER                              000000F6
+LEER                              000000FE
 LVDCON                            00000FD2
 LVDEN                             00000004
 LVDIE                             00000002
@@ -1340,10 +1344,10 @@ LVV0                              00000000
 LVV1                              00000001
 LVV2                              00000002
 LVV3                              00000003
-MAIN                              000000B6
+MAIN                              000000BE
 MCLR                              00000005
 MEMCON                            00000F9C
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 24
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 24
 
 
 SYMBOL TABLE
@@ -1402,7 +1406,7 @@ P1DC2                             00000002
 P1DC3                             00000003
 P1DC4                             00000004
 P1DC5                             00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 25
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 25
 
 
 SYMBOL TABLE
@@ -1461,7 +1465,7 @@ PDC4                              00000004
 PDC5                              00000005
 PDC6                              00000006
 PEIE                              00000006
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 26
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 26
 
 
 SYMBOL TABLE
@@ -1500,78 +1504,78 @@ PR4                               00000F77
 PREINC0                           00000FEC
 PREINC1                           00000FE4
 PREINC2                           00000FDC
-PRINT                             000001B4
-PRINT_                            0000036C
-PRINT_0                           000003BC
-PRINT_1                           00000374
-PRINT_2                           0000037C
-PRINT_3                           00000384
-PRINT_4                           0000038C
-PRINT_5                           00000394
-PRINT_6                           0000039C
-PRINT_7                           000003A4
-PRINT_8                           000003AC
-PRINT_9                           000003B4
-PRINT_A                           000001BC
-PRINT_B                           000001C4
-PRINT_C                           000001CC
-PRINT_D                           000001D4
-PRINT_E                           000001DC
-PRINT_F                           000001E4
-PRINT_G                           000001EC
-PRINT_H                           000001F4
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 27
+PRINT                             000001BC
+PRINT_                            00000374
+PRINT_0                           000003C4
+PRINT_1                           0000037C
+PRINT_2                           00000384
+PRINT_3                           0000038C
+PRINT_4                           00000394
+PRINT_5                           0000039C
+PRINT_6                           000003A4
+PRINT_7                           000003AC
+PRINT_8                           000003B4
+PRINT_9                           000003BC
+PRINT_A                           000001C4
+PRINT_B                           000001CC
+PRINT_C                           000001D4
+PRINT_D                           000001DC
+PRINT_E                           000001E4
+PRINT_F                           000001EC
+PRINT_G                           000001F4
+PRINT_H                           000001FC
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 27
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-PRINT_I                           000001FC
-PRINT_J                           00000204
-PRINT_K                           0000020C
-PRINT_L                           00000214
-PRINT_M                           0000021C
-PRINT_N                           00000224
-PRINT_O                           00000234
-PRINT_P                           0000023C
-PRINT_Q                           00000244
-PRINT_R                           0000024C
-PRINT_S                           00000254
-PRINT_T                           0000025C
-PRINT_U                           00000264
-PRINT_V                           0000026C
-PRINT_W                           00000274
-PRINT_X                           0000027C
-PRINT_Y                           00000284
-PRINT_Z                           0000028C
-PRINT_a                           00000294
-PRINT_b                           0000029C
-PRINT_c                           000002A4
-PRINT_d                           000002AC
-PRINT_e                           000002B4
-PRINT_f                           000002BC
-PRINT_g                           000002C4
-PRINT_h                           000002CC
-PRINT_i                           000002D4
-PRINT_j                           000002DC
-PRINT_k                           000002E4
-PRINT_l                           000002EC
-PRINT_m                           000002F4
-PRINT_n                           000002FC
-PRINT_o                           0000030C
-PRINT_p                           00000314
-PRINT_q                           0000031C
-PRINT_r                           00000324
-PRINT_s                           0000032C
-PRINT_t                           00000334
-PRINT_u                           0000033C
-PRINT_v                           00000344
-PRINT_w                           0000034C
-PRINT_x                           00000354
-PRINT_y                           0000035C
-PRINT_z                           00000364
-PRINT_Ñ                           0000022C
-PRINT_ñ                           00000304
+PRINT_I                           00000204
+PRINT_J                           0000020C
+PRINT_K                           00000214
+PRINT_L                           0000021C
+PRINT_M                           00000224
+PRINT_N                           0000022C
+PRINT_O                           0000023C
+PRINT_P                           00000244
+PRINT_Q                           0000024C
+PRINT_R                           00000254
+PRINT_S                           0000025C
+PRINT_T                           00000264
+PRINT_U                           0000026C
+PRINT_V                           00000274
+PRINT_W                           0000027C
+PRINT_X                           00000284
+PRINT_Y                           0000028C
+PRINT_Z                           00000294
+PRINT_a                           0000029C
+PRINT_b                           000002A4
+PRINT_c                           000002AC
+PRINT_d                           000002B4
+PRINT_e                           000002BC
+PRINT_f                           000002C4
+PRINT_g                           000002CC
+PRINT_h                           000002D4
+PRINT_i                           000002DC
+PRINT_j                           000002E4
+PRINT_k                           000002EC
+PRINT_l                           000002F4
+PRINT_m                           000002FC
+PRINT_n                           00000304
+PRINT_o                           00000314
+PRINT_p                           0000031C
+PRINT_q                           00000324
+PRINT_r                           0000032C
+PRINT_s                           00000334
+PRINT_t                           0000033C
+PRINT_u                           00000344
+PRINT_v                           0000034C
+PRINT_w                           00000354
+PRINT_x                           0000035C
+PRINT_y                           00000364
+PRINT_z                           0000036C
+PRINT_Ñ                           00000234
+PRINT_ñ                           0000030C
 PROD                              00000FF3
 PRODH                             00000FF4
 PRODL                             00000FF3
@@ -1579,7 +1583,7 @@ PRSEN                             00000007
 PSA                               00000003
 PSP0                              00000000
 PSP1                              00000001
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 28
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 28
 
 
 SYMBOL TABLE
@@ -1638,7 +1642,7 @@ RC1                               00000001
 RC1IE                             00000005
 RC1IF                             00000005
 RC1IP                             00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 29
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 29
 
 
 SYMBOL TABLE
@@ -1697,7 +1701,7 @@ RF5                               00000005
 RF6                               00000006
 RF7                               00000007
 RG0                               00000000
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 30
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 30
 
 
 SYMBOL TABLE
@@ -1756,7 +1760,7 @@ SDI                               00000004
 SDI1                              00000004
 SDI2                              00000005
 SDO                               00000005
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 31
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 31
 
 
 SYMBOL TABLE
@@ -1815,7 +1819,7 @@ SSPIP                             00000003
 SSPM0                             00000000
 SSPM1                             00000001
 SSPM2                             00000002
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 32
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 32
 
 
 SYMBOL TABLE
@@ -1874,7 +1878,7 @@ T3CCP2                            00000006
 T3CKPS0                           00000004
 T3CKPS1                           00000005
 T3CON                             00000FB1
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 33
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 33
 
 
 SYMBOL TABLE
@@ -1933,7 +1937,7 @@ TOSU                              00000FFF
 TRISA                             00000F92
 TRISA0                            00000000
 TRISA1                            00000001
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 34
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 34
 
 
 SYMBOL TABLE
@@ -1992,7 +1996,7 @@ TRISF6                            00000006
 TRISF7                            00000007
 TRISG                             00000F98
 TRISG0                            00000000
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 35
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 35
 
 
 SYMBOL TABLE
@@ -2051,7 +2055,7 @@ TXEN2                             00000005
 TXIE                              00000004
 TXIF                              00000004
 TXIP                              00000004
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 36
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 36
 
 
 SYMBOL TABLE
@@ -2079,6 +2083,7 @@ WCOL                              00000007
 WDTCON                            00000FD1
 WM0                               00000000
 WM1                               00000001
+WOFF                              0000009A
 WR                                00000001
 WREG                              00000FE8
 WREN                              00000002
@@ -2109,13 +2114,13 @@ _CONFIG2H                         00300003
 _CONFIG2L                         00300002
 _CONFIG3H                         00300005
 _CONFIG3L                         00300004
-_CONFIG4L                         00300006
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 37
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 37
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_CONFIG4L                         00300006
 _CONFIG5H                         00300009
 _CONFIG5L                         00300008
 _CONFIG6H                         0030000B
@@ -2168,13 +2173,13 @@ _EBTRB_OFF_7H                     000000FF
 _EBTRB_ON_7H                      000000BF
 _ECCPMX_PORTE_3H                  000000FF
 _ECCPMX_PORTH_3H                  000000FD
-_FCMEN_OFF_1H                     000000BF
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 38
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 38
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_FCMEN_OFF_1H                     000000BF
 _FCMEN_ON_1H                      000000FF
 _IDLOC0                           00200000
 _IDLOC1                           00200001
@@ -2227,13 +2232,13 @@ _WDTPS_4_2H                       000000E5
 _WDTPS_512_2H                     000000F3
 _WDTPS_64_2H                      000000ED
 _WDTPS_8192_2H                    000000FB
-_WDTPS_8_2H                       000000E7
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 39
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 39
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_WDTPS_8_2H                       000000E7
 _WDT_OFF_2H                       000000FE
 _WDT_ON_2H                        000000FF
 _WRT0_OFF_6L                      000000FF
@@ -2279,24 +2284,24 @@ MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 02C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0300 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0340 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-MPASM  5.41                        PRUEBA.ASM   12-3-2012  12:40:50         PAGE 40
+MPASM  5.41                        PRUEBA.ASM   12-5-2012  15:51:56         PAGE 40
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
 
+0340 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0380 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 03C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0400 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0440 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0480 : XXXXXXXXXX------ ---------------- ---------------- ----------------
+0480 : XXXXXXXXXXXXXXXX XX-------------- ---------------- ----------------
 0000 : -XXXXXX-XXXXXX-- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Bytes Used:  1174
-Program Memory Bytes Free: 129898
+Program Memory Bytes Used:  1182
+Program Memory Bytes Free: 129890
 
 
 Errors   :     0

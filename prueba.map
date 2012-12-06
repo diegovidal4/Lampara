@@ -1,12 +1,12 @@
 MPLINK 4.39, Linker
-Linker Map File - Created Mon Dec 03 12:40:51 2012
+Linker Map File - Created Wed Dec 05 15:51:57 2012
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
                    .org_1       code   0x000000    program   0x000008
-                   .org_2       code   0x000008    program   0x000482
+                   .org_2       code   0x000008    program   0x00048a
   .config_300001_PRUEBA.O    romdata   0x300001    program   0x000001
   .config_300002_PRUEBA.O    romdata   0x300002    program   0x000001
   .config_300003_PRUEBA.O    romdata   0x300003    program   0x000001
@@ -25,97 +25,98 @@ Linker Map File - Created Mon Dec 03 12:40:51 2012
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000489      
+                            0x000000    0x000491      
                             0x300001    0x300006      
                             0x300008    0x30000d      
-            1174 out of 132120 program addresses used, program memory utilization is 0%
+            1182 out of 132120 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                     CHEK   0x00047e    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                     CHEK   0x000486    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
                     CLEAR   0x000032    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
                      CONF   0x000042    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-               CONFIG_SPI   0x000144    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                    DELAY   0x0000ba    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                 ESCRIBIR   0x0000d0    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-             ESCRIBIR_OFF   0x000124    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-              ESCRIBIR_ON   0x00010a    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                   INICIO   0x00009a    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                  INI_LCD   0x00018e    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-              INSTRUCCION   0x0003c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+               CONFIG_SPI   0x00014c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                    DELAY   0x0000c2    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                 ESCRIBIR   0x0000d8    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+             ESCRIBIR_OFF   0x00012c    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+              ESCRIBIR_ON   0x000112    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                   INICIO   0x0000a2    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                  INI_LCD   0x000196    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+              INSTRUCCION   0x0003cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
                  INT_CALL   0x000008    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
                   INT_END   0x000030    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                     LEER   0x0000f6    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                     MAIN   0x0000b6    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                    PRINT   0x0001b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                   PRINT_   0x00036c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_0   0x0003bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_1   0x000374    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_2   0x00037c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_3   0x000384    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_4   0x00038c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_5   0x000394    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_6   0x00039c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_7   0x0003a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_8   0x0003ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_9   0x0003b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_A   0x0001bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_B   0x0001c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_C   0x0001cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_D   0x0001d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_E   0x0001dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_F   0x0001e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_G   0x0001ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_H   0x0001f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_I   0x0001fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_J   0x000204    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_K   0x00020c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_L   0x000214    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_M   0x00021c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_N   0x000224    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_O   0x000234    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_P   0x00023c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Q   0x000244    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_R   0x00024c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_S   0x000254    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_T   0x00025c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_U   0x000264    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_V   0x00026c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_W   0x000274    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_X   0x00027c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Y   0x000284    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Z   0x00028c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_a   0x000294    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_b   0x00029c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_c   0x0002a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_d   0x0002ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_e   0x0002b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_f   0x0002bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_g   0x0002c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_h   0x0002cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_i   0x0002d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_j   0x0002dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_k   0x0002e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_l   0x0002ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_m   0x0002f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_n   0x0002fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_o   0x00030c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_p   0x000314    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_q   0x00031c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_r   0x000324    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_s   0x00032c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_t   0x000334    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_u   0x00033c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_v   0x000344    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_w   0x00034c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_x   0x000354    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_y   0x00035c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_z   0x000364    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Ñ   0x00022c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_ñ   0x000304    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                     LEER   0x0000fe    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                     MAIN   0x0000be    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                    PRINT   0x0001bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                   PRINT_   0x000374    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_0   0x0003c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_1   0x00037c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_2   0x000384    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_3   0x00038c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_4   0x000394    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_5   0x00039c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_6   0x0003a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_7   0x0003ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_8   0x0003b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_9   0x0003bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_A   0x0001c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_B   0x0001cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_C   0x0001d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_D   0x0001dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_E   0x0001e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_F   0x0001ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_G   0x0001f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_H   0x0001fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_I   0x000204    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_J   0x00020c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_K   0x000214    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_L   0x00021c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_M   0x000224    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_N   0x00022c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_O   0x00023c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_P   0x000244    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Q   0x00024c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_R   0x000254    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_S   0x00025c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_T   0x000264    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_U   0x00026c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_V   0x000274    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_W   0x00027c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_X   0x000284    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Y   0x00028c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Z   0x000294    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_a   0x00029c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_b   0x0002a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_c   0x0002ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_d   0x0002b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_e   0x0002bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_f   0x0002c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_g   0x0002cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_h   0x0002d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_i   0x0002dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_j   0x0002e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_k   0x0002ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_l   0x0002f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_m   0x0002fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_n   0x000304    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_o   0x000314    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_p   0x00031c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_q   0x000324    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_r   0x00032c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_s   0x000334    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_t   0x00033c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_u   0x000344    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_v   0x00034c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_w   0x000354    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_x   0x00035c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_y   0x000364    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_z   0x00036c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Ñ   0x000234    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_ñ   0x00030c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                     WOFF   0x00009a    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
 
 
 
@@ -126,82 +127,83 @@ Linker Map File - Created Mon Dec 03 12:40:51 2012
                   INT_END   0x000030    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
                     CLEAR   0x000032    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
                      CONF   0x000042    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                   INICIO   0x00009a    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                     MAIN   0x0000b6    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                    DELAY   0x0000ba    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                 ESCRIBIR   0x0000d0    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-                     LEER   0x0000f6    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-              ESCRIBIR_ON   0x00010a    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-             ESCRIBIR_OFF   0x000124    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
-               CONFIG_SPI   0x000144    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  INI_LCD   0x00018e    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                    PRINT   0x0001b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_A   0x0001bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_B   0x0001c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_C   0x0001cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_D   0x0001d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_E   0x0001dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_F   0x0001e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_G   0x0001ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_H   0x0001f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_I   0x0001fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_J   0x000204    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_K   0x00020c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_L   0x000214    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_M   0x00021c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_N   0x000224    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Ñ   0x00022c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_O   0x000234    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_P   0x00023c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Q   0x000244    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_R   0x00024c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_S   0x000254    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_T   0x00025c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_U   0x000264    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_V   0x00026c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_W   0x000274    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_X   0x00027c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Y   0x000284    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_Z   0x00028c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_a   0x000294    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_b   0x00029c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_c   0x0002a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_d   0x0002ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_e   0x0002b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_f   0x0002bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_g   0x0002c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_h   0x0002cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_i   0x0002d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_j   0x0002dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_k   0x0002e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_l   0x0002ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_m   0x0002f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_n   0x0002fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_ñ   0x000304    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_o   0x00030c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_p   0x000314    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_q   0x00031c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_r   0x000324    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_s   0x00032c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_t   0x000334    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_u   0x00033c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_v   0x000344    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_w   0x00034c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_x   0x000354    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_y   0x00035c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_z   0x000364    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                   PRINT_   0x00036c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_1   0x000374    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_2   0x00037c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_3   0x000384    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_4   0x00038c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_5   0x000394    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_6   0x00039c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_7   0x0003a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_8   0x0003ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_9   0x0003b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                  PRINT_0   0x0003bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-              INSTRUCCION   0x0003c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
-                     CHEK   0x00047e    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                     WOFF   0x00009a    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                   INICIO   0x0000a2    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                     MAIN   0x0000be    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                    DELAY   0x0000c2    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                 ESCRIBIR   0x0000d8    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+                     LEER   0x0000fe    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+              ESCRIBIR_ON   0x000112    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+             ESCRIBIR_OFF   0x00012c    program     static C:\Users\Diego\Documents\GitHub\Lampara\prueba.asm
+               CONFIG_SPI   0x00014c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  INI_LCD   0x000196    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                    PRINT   0x0001bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_A   0x0001c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_B   0x0001cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_C   0x0001d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_D   0x0001dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_E   0x0001e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_F   0x0001ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_G   0x0001f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_H   0x0001fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_I   0x000204    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_J   0x00020c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_K   0x000214    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_L   0x00021c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_M   0x000224    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_N   0x00022c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Ñ   0x000234    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_O   0x00023c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_P   0x000244    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Q   0x00024c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_R   0x000254    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_S   0x00025c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_T   0x000264    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_U   0x00026c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_V   0x000274    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_W   0x00027c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_X   0x000284    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Y   0x00028c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_Z   0x000294    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_a   0x00029c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_b   0x0002a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_c   0x0002ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_d   0x0002b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_e   0x0002bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_f   0x0002c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_g   0x0002cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_h   0x0002d4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_i   0x0002dc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_j   0x0002e4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_k   0x0002ec    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_l   0x0002f4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_m   0x0002fc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_n   0x000304    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_ñ   0x00030c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_o   0x000314    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_p   0x00031c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_q   0x000324    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_r   0x00032c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_s   0x000334    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_t   0x00033c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_u   0x000344    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_v   0x00034c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_w   0x000354    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_x   0x00035c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_y   0x000364    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_z   0x00036c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                   PRINT_   0x000374    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_1   0x00037c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_2   0x000384    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_3   0x00038c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_4   0x000394    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_5   0x00039c    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_6   0x0003a4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_7   0x0003ac    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_8   0x0003b4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_9   0x0003bc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                  PRINT_0   0x0003c4    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+              INSTRUCCION   0x0003cc    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
+                     CHEK   0x000486    program     static C:\Users\Diego\Documents\GitHub\Lampara\Lib_LCD_18F.INC
 
 

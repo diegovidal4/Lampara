@@ -95,7 +95,9 @@ CONF
 			BSF		LCD_RS  
 			RETURN
 
-
+WOFF
+			CALL	ESCRIBIR_OFF
+			GOTO 	MAIN
 			
 INICIO
 			BSF     LCD_EN                                       ; LCD_EN = 1 / prende el display LCD
@@ -105,9 +107,11 @@ INICIO
       		BSF     LCD_RS
 			CALL	LEER
 			MOVWF	PORTD
-			BTFSC	PORTD,0
-			CALL 	ESCRIBIR_ON
-			CALL	ESCRIBIR_OFF 
+			BTFSS	PORTD,1
+			GOTO	WOFF
+			CALL	ESCRIBIR_ON 
+
+
 			
 MAIN
 			GOTO	MAIN
